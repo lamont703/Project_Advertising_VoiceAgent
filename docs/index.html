@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceAgent Documentation</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .docs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .docs-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e6ed;
+        }
+
+        .docs-nav {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .docs-nav h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .docs-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .docs-nav li {
+            margin: 0.5rem 0;
+        }
+
+        .docs-nav a {
+            color: #3498db;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            border-radius: 6px;
+            padding-left: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .docs-nav a:hover {
+            background-color: #e3f2fd;
+        }
+
+        .docs-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .docs-section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .docs-section h3 {
+            color: #34495e;
+            margin-top: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .workflow-diagram {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .workflow-step {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            margin: 0.5rem;
+            position: relative;
+        }
+
+        .workflow-step::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .workflow-step:last-child::after {
+            display: none;
+        }
+
+        .integration-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .integration-item {
+            background: white;
+            border: 2px solid #e0e6ed;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .integration-item:hover {
+            border-color: #3498db;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .docs-container {
+                padding: 1rem;
+            }
+
+            .workflow-step {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .workflow-step::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="docs-container">
+        <header class="docs-header">
+            <h1>🎙️ VoiceAgent Documentation</h1>
+            <p>Complete guide to the AI-powered voice lead capture system</p>
+            <a href="../index.html" style="color: #3498db; text-decoration: none;">← Back to VoiceAgent</a>
+        </header>
+
+        <nav class="docs-nav">
+            <h3>📚 Table of Contents</h3>
+            <ul>
+                <li><a href="#overview">System Overview</a></li>
+                <li><a href="#features">Features & Capabilities</a></li>
+                <li><a href="#architecture">System Architecture</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#voice-interface">Voice Interface Guide</a></li>
+                <li><a href="#admin-panel">Admin Panel</a></li>
+                <li><a href="#integrations">Integrations</a></li>
+                <li><a href="#workflows">n8n Workflows</a></li>
+                <li><a href="#customization">Customization</a></li>
+                <li><a href="#api">API Reference</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ul>
+        </nav>
+
+        <section id="overview" class="docs-section">
+            <h2>🔍 System Overview</h2>
+            <p>VoiceAgent is an intelligent voice-powered lead capture system designed specifically for social media
+                advertisers. It provides a seamless, conversational interface that converts ad traffic into qualified
+                leads through natural voice interactions.</p>
+
+            <h3>🎯 Primary Use Case</h3>
+            <p>When potential customers click on your social media ads, instead of filling out traditional forms,
+                they're presented with a friendly voice interface that asks qualifying questions naturally, making the
+                lead capture process more engaging and increasing conversion rates.</p>
+
+            <div class="workflow-diagram">
+                <h3>Lead Capture Flow</h3>
+                <div class="workflow-step">Ad Click</div>
+                <div class="workflow-step">Voice Landing</div>
+                <div class="workflow-step">AI Conversation</div>
+                <div class="workflow-step">Lead Qualification</div>
+                <div class="workflow-step">CRM Integration</div>
+                <div class="workflow-step">Follow-up Automation</div>
+            </div>
+
+            <h3>🏗️ Built For Advertisers</h3>
+            <ul>
+                <li><strong>Higher Conversion Rates:</strong> Voice interactions feel more personal and less intrusive
+                    than forms</li>
+                <li><strong>Better Lead Quality:</strong> Natural conversation allows for better qualification</li>
+                <li><strong>Reduced Friction:</strong> No typing required - just tap and speak</li>
+                <li><strong>Mobile Optimized:</strong> Perfect for mobile traffic from social media ads</li>
+                <li><strong>Instant Follow-up:</strong> Automatic integration with your existing CRM and workflows</li>
+            </ul>
+        </section>
+
+        <section id="features" class="docs-section">
+            <h2>✨ Features & Capabilities</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎙️ Voice Recognition</h4>
+                    <p>Advanced speech-to-text using Web Speech API with fallback options for maximum compatibility
+                        across devices and browsers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🤖 AI Conversation Flow</h4>
+                    <p>Intelligent conversation management that adapts to user responses and guides them through the
+                        qualification process naturally.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📱 Mobile-First Design</h4>
+                    <p>Optimized for mobile devices with touch-friendly interfaces and responsive design that works on
+                        any screen size.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔗 CRM Integration</h4>
+                    <p>Seamless integration with GoHighLevel, HubSpot, and other popular CRM systems for automatic lead
+                        capture and tagging.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>⚡ Real-time Processing</h4>
+                    <p>Live conversation progress tracking with immediate feedback and visual indicators for user
+                        engagement.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎨 Customizable Branding</h4>
+                    <p>Fully customizable interface, colors, messaging, and agent personality to match your brand and
+                        campaign.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📊 Analytics Dashboard</h4>
+                    <p>Comprehensive analytics including conversion rates, lead quality scores, and conversation
+                        insights.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔄 n8n Workflow Integration</h4>
+                    <p>Powerful automation workflows that can trigger complex business processes based on lead data and
+                        responses.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="docs-section">
+            <h2>🏗️ System Architecture</h2>
+
+            <h3>Frontend Components</h3>
+            <ul>
+                <li><strong>Landing Page (index.html):</strong> Initial voice activation interface</li>
+                <li><strong>Voice Interface (voice-interface.html):</strong> Main conversation interface</li>
+                <li><strong>Admin Panel (admin.html):</strong> Configuration and management dashboard</li>
+            </ul>
+
+            <h3>Core Technologies</h3>
+            <div class="code-block">
+                Frontend: HTML5, CSS3, JavaScript (ES6+)
+                Voice: Web Speech API (SpeechRecognition, SpeechSynthesis)
+                Styling: Custom CSS with CSS Grid and Flexbox
+                Icons: SVG icons and emoji for visual elements
+                Fonts: Inter font family for modern typography
+            </div>
+
+            <h3>Integration Layer</h3>
+            <ul>
+                <li><strong>n8n Workflows:</strong> Automation and business logic processing</li>
+                <li><strong>CRM APIs:</strong> GoHighLevel, HubSpot, Mailchimp integration</li>
+                <li><strong>Webhook Endpoints:</strong> Real-time data transmission</li>
+                <li><strong>Analytics APIs:</strong> Tracking and reporting integration</li>
+            </ul>
+
+            <h3>Data Flow</h3>
+            <div class="workflow-diagram">
+                <div class="workflow-step">User Speaks</div>
+                <div class="workflow-step">Speech-to-Text</div>
+                <div class="workflow-step">AI Processing</div>
+                <div class="workflow-step">Response Generation</div>
+                <div class="workflow-step">Text-to-Speech</div>
+                <div class="workflow-step">Data Capture</div>
+                <div class="workflow-step">CRM/Workflow Trigger</div>
+            </div>
+        </section>
+
+        <section id="getting-started" class="docs-section">
+            <h2>🚀 Getting Started</h2>
+
+            <h3>Quick Setup Guide</h3>
+            <ol>
+                <li><strong>Download the System:</strong> Clone or download all project files</li>
+                <li><strong>Configure Your Brand:</strong> Update colors, logos, and messaging in the CSS files</li>
+                <li><strong>Set Up Integrations:</strong> Connect your CRM and configure webhook endpoints</li>
+                <li><strong>Customize Questions:</strong> Use the admin panel to set up your qualification questions
+                </li>
+                <li><strong>Test the System:</strong> Run through the entire flow to ensure everything works</li>
+                <li><strong>Deploy:</strong> Host on your web server or CDN</li>
+            </ol>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li>Modern web browser with Speech API support (Chrome, Safari, Edge)</li>
+                <li>HTTPS hosting (required for microphone access)</li>
+                <li>n8n instance for workflow automation</li>
+                <li>CRM system API access (GoHighLevel, HubSpot, etc.)</li>
+            </ul>
+
+            <h3>File Structure</h3>
+            <div class="code-block">
+                VoiceAgent/
+                ├── index.html # Landing page
+                ├── voice-interface.html # Main voice interface
+                ├── admin.html # Admin dashboard
+                ├── assets/
+                │ ├── css/
+                │ │ ├── main.css # Main styles
+                │ │ └── admin.css # Admin panel styles
+                │ └── js/
+                │ ├── main.js # Landing page logic
+                │ ├── voice-interface.js # Voice conversation logic
+                │ └── admin.js # Admin panel functionality
+                └── docs/
+                ├── index.html # This documentation
+                ├── wireframes.html # System wireframes
+                └── api-reference.html # API documentation
+            </div>
+        </section>
+
+        <section id="voice-interface" class="docs-section">
+            <h2>🎙️ Voice Interface Guide</h2>
+
+            <h3>How It Works</h3>
+            <p>The voice interface uses the Web Speech API to provide seamless voice interaction. Here's how users
+                interact with the system:</p>
+
+            <ol>
+                <li><strong>Activation:</strong> User taps the "Tap to Speak" button</li>
+                <li><strong>Listening:</strong> Microphone activates with visual feedback (pulsing animation)</li>
+                <li><strong>Processing:</strong> Speech is converted to text and processed by the AI</li>
+                <li><strong>Response:</strong> AI generates appropriate response and plays it back via text-to-speech
+                </li>
+                <li><strong>Progress:</strong> Visual progress bar shows conversation advancement</li>
+            </ol>
+
+            <h3>Conversation Flow</h3>
+            <p>The system follows a structured conversation flow designed to capture essential lead information:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>1. Greeting Phase</h4>
+                    <p>Personalized welcome message that sets the tone and explains the process to the user.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>2. Name Capture</h4>
+                    <p>Natural question to capture the prospect's name, with validation and confirmation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>3. Contact Information</h4>
+                    <p>Progressive disclosure of email and phone number collection with format validation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>4. Business Qualification</h4>
+                    <p>Customizable questions specific to your business needs and qualification criteria.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>5. Interest Assessment</h4>
+                    <p>Gauge prospect interest level and timeline for potential engagement.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>6. Closing & Next Steps</h4>
+                    <p>Thank the prospect and explain what happens next in your sales process.</p>
+                </div>
+            </div>
+
+            <h3>Visual Feedback</h3>
+            <ul>
+                <li><strong>Pulse Animation:</strong> Indicates when the system is listening</li>
+                <li><strong>Progress Bar:</strong> Shows conversation completion percentage</li>
+                <li><strong>Status Messages:</strong> Real-time feedback on system state</li>
+                <li><strong>Agent Avatar:</strong> Visual representation of the AI assistant</li>
+            </ul>
+        </section>
+
+        <section id="admin-panel" class="docs-section">
+            <h2>⚙️ Admin Panel</h2>
+
+            <p>The admin panel provides comprehensive control over your VoiceAgent system with six main sections:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📊 Dashboard</h4>
+                    <p>Real-time overview of system performance, including total conversations, leads captured,
+                        conversion rates, and recent activity feed.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🤖 Agent Configuration</h4>
+                    <p>Customize your AI agent's personality, voice style, greeting message, and the sequence of
+                        qualification questions.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔄 Workflows</h4>
+                    <p>Manage n8n workflow integrations, view workflow status, and configure automation triggers based
+                        on lead data.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🔗 Integrations</h4>
+                    <p>Configure connections to CRM systems, email marketing platforms, and other business tools with
+                        API key management.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>👥 Leads Management</h4>
+                    <p>View, search, filter, and export captured leads with detailed conversation logs and qualification
+                        scores.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📈 Analytics</h4>
+                    <p>Detailed performance metrics, conversion funnels, source tracking, and ROI analysis for your
+                        voice campaigns.</p>
+                </div>
+            </div>
+
+            <h3>Key Admin Features</h3>
+            <ul>
+                <li><strong>Real-time Updates:</strong> Dashboard refreshes automatically every 30 seconds</li>
+                <li><strong>Bulk Operations:</strong> Select and manage multiple leads simultaneously</li>
+                <li><strong>Export Functionality:</strong> Download lead data as CSV for external analysis</li>
+                <li><strong>Test Mode:</strong> Preview and test agent configurations before deploying</li>
+                <li><strong>Activity Logging:</strong> Complete audit trail of all system activities</li>
+            </ul>
+        </section>
+
+        <section id="integrations" class="docs-section">
+            <h2>🔗 Integrations</h2>
+
+            <p>VoiceAgent supports integration with major CRM and marketing platforms:</p>
+
+            <div class="integration-list">
+                <div class="integration-item">
+                    <h4>GoHighLevel</h4>
+                    <p>Full CRM integration with contact creation, tagging, and pipeline management</p>
+                </div>
+
+                <div class="integration-item">
+                    <h4>HubSpot</h4>
+                    <p>Contact and deal creation with custom properties and workflow triggers</p>
+                </div>
+
+                <div class="integration-item">
+                    <h4>Mailchimp</h4>
+                    <p>Automatic list subscription and email marketing campaign triggers</p>
+                </div>
+
+                <div class="integration-item">
+                    <h4>Slack</h4>
+                    <p>Real-time notifications for new leads and system alerts</p>
+                </div>
+
+                <div class="integration-item">
+                    <h4>Zapier</h4>
+                    <p>Connect to 1000+ apps through Zapier's automation platform</p>
+                </div>
+
+                <div class="integration-item">
+                    <h4>Webhooks</h4>
+                    <p>Custom webhook endpoints for any external system integration</p>
+                </div>
+            </div>
+
+            <h3>Integration Setup</h3>
+            <ol>
+                <li><strong>API Keys:</strong> Obtain API credentials from your target platform</li>
+                <li><strong>Webhook Configuration:</strong> Set up endpoint URLs in the admin panel</li>
+                <li><strong>Field Mapping:</strong> Map VoiceAgent data fields to your CRM fields</li>
+                <li><strong>Testing:</strong> Use test mode to verify data flow</li>
+                <li><strong>Activation:</strong> Enable integration and monitor initial data flow</li>
+            </ol>
+        </section>
+
+        <section id="workflows" class="docs-section">
+            <h2>🔄 n8n Workflows</h2>
+
+            <p>n8n integration enables powerful automation workflows triggered by voice interactions:</p>
+
+            <h3>Pre-built Workflow Templates</h3>
+            <ul>
+                <li><strong>Lead Scoring:</strong> Automatically score leads based on conversation data</li>
+                <li><strong>Follow-up Sequences:</strong> Trigger email or SMS sequences based on responses</li>
+                <li><strong>CRM Updates:</strong> Update contact records and move through sales pipelines</li>
+                <li><strong>Team Notifications:</strong> Alert sales team members about high-quality leads</li>
+                <li><strong>Calendar Booking:</strong> Automatically book appointments for qualified prospects</li>
+            </ul>
+
+            <h3>Workflow Triggers</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Conversation Started</h4>
+                    <p>Triggered when a user begins a voice conversation</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Lead Captured</h4>
+                    <p>Triggered when all required information is collected</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Qualification Complete</h4>
+                    <p>Triggered when the full qualification process is finished</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>High-Value Lead</h4>
+                    <p>Triggered when lead meets specific high-value criteria</p>
+                </div>
+            </div>
+
+            <h3>Available Data Points</h3>
+            <p>Each workflow receives comprehensive data about the lead and conversation:</p>
+            <div class="code-block">
+                {
+                "leadId": "unique-lead-identifier",
+                "timestamp": "2024-01-15T10:30:00Z",
+                "source": "facebook-ad-campaign",
+                "contactInfo": {
+                "name": "John Smith",
+                "email": "john@example.com",
+                "phone": "+1-555-0123"
+                },
+                "responses": {
+                "businessType": "E-commerce",
+                "monthlyRevenue": "$10k-50k",
+                "mainChallenge": "Lead generation"
+                },
+                "conversationMetrics": {
+                "duration": 180,
+                "completionRate": 100,
+                "qualificationScore": 85
+                }
+                }
+            </div>
+        </section>
+
+        <section id="customization" class="docs-section">
+            <h2>🎨 Customization</h2>
+
+            <h3>Branding Customization</h3>
+            <p>Easily customize the appearance to match your brand:</p>
+
+            <h4>Colors & Styling</h4>
+            <p>Update the CSS variables in <code>main.css</code> and <code>admin.css</code>:</p>
+            <div class="code-block">
+                :root {
+                --primary-color: #3498db; /* Your brand primary color */
+                --secondary-color: #2c3e50; /* Secondary/text color */
+                --accent-color: #e74c3c; /* Accent/highlight color */
+                --background-color: #f8f9fa; /* Background color */
+                }
+            </div>
+
+            <h4>Logo & Messaging</h4>
+            <ul>
+                <li>Update the logo and company name in the header</li>
+                <li>Customize the tagline and welcome messages</li>
+                <li>Modify the feature descriptions and value propositions</li>
+            </ul>
+
+            <h3>Agent Personality</h3>
+            <p>Configure your AI agent's personality through the admin panel:</p>
+            <ul>
+                <li><strong>Professional:</strong> Formal, business-focused tone</li>
+                <li><strong>Friendly:</strong> Casual, approachable communication style</li>
+                <li><strong>Expert:</strong> Knowledgeable, consultative approach</li>
+                <li><strong>Custom:</strong> Define your own personality traits</li>
+            </ul>
+
+            <h3>Question Customization</h3>
+            <p>Tailor the qualification questions to your specific business needs:</p>
+            <ul>
+                <li>Add industry-specific questions</li>
+                <li>Configure conditional question flows</li>
+                <li>Set required vs. optional information</li>
+                <li>Define validation rules for responses</li>
+            </ul>
+        </section>
+
+        <section id="api" class="docs-section">
+            <h2>🔧 API Reference</h2>
+
+            <p>VoiceAgent provides several API endpoints for integration and data management:</p>
+
+            <h3>Lead Management API</h3>
+            <div class="code-block">
+                POST /api/leads
+                GET /api/leads
+                GET /api/leads/{id}
+                PUT /api/leads/{id}
+                DELETE /api/leads/{id}
+            </div>
+
+            <h3>Conversation API</h3>
+            <div class="code-block">
+                POST /api/conversations/start
+                POST /api/conversations/{id}/message
+                GET /api/conversations/{id}
+                POST /api/conversations/{id}/complete
+            </div>
+
+            <h3>Configuration API</h3>
+            <div class="code-block">
+                GET /api/config/agent
+                PUT /api/config/agent
+                GET /api/config/questions
+                PUT /api/config/questions
+            </div>
+
+            <p>For detailed API documentation with request/response examples, see the <a href="api-reference.html">API
+                    Reference</a> page.</p>
+        </section>
+
+        <section id="troubleshooting" class="docs-section">
+            <h2>🔧 Troubleshooting</h2>
+
+            <h3>Common Issues</h3>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Microphone Not Working</h4>
+                    <p><strong>Solution:</strong> Ensure HTTPS hosting, check browser permissions, and verify microphone
+                        hardware.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Speech Recognition Fails</h4>
+                    <p><strong>Solution:</strong> Check browser compatibility, ensure stable internet connection, and
+                        try different browsers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>CRM Integration Issues</h4>
+                    <p><strong>Solution:</strong> Verify API keys, check webhook URLs, and review integration logs in
+                        admin panel.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Mobile Performance</h4>
+                    <p><strong>Solution:</strong> Optimize for mobile browsers, check touch event handling, and verify
+                        responsive design.</p>
+                </div>
+            </div>
+
+            <h3>Browser Compatibility</h3>
+            <ul>
+                <li><strong>Chrome:</strong> Full support for all features</li>
+                <li><strong>Safari:</strong> Full support on iOS 14.5+ and macOS</li>
+                <li><strong>Edge:</strong> Full support on Windows</li>
+                <li><strong>Firefox:</strong> Limited Speech API support, may require fallbacks</li>
+            </ul>
+
+            <h3>Performance Optimization</h3>
+            <ul>
+                <li>Enable gzip compression on your web server</li>
+                <li>Use CDN for faster asset delivery</li>
+                <li>Optimize images and audio files</li>
+                <li>Implement service worker for offline functionality</li>
+            </ul>
+
+            <h3>Security Considerations</h3>
+            <ul>
+                <li>Always use HTTPS for microphone access</li>
+                <li>Implement rate limiting for API endpoints</li>
+                <li>Validate and sanitize all user inputs</li>
+                <li>Use secure webhook URLs with authentication</li>
+            </ul>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem; border-top: 1px solid #e0e6ed; margin-top: 3rem;">
+            <p style="color: #7f8c8d;">© 2024 VoiceAgent Documentation. Last updated: January 2024</p>
+            <div style="margin-top: 1rem;">
+                <a href="../index.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">← Back to
+                    VoiceAgent</a>
+                <a href="wireframes.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">View Wireframes
+                    →</a>
+                <a href="api-reference.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">API
+                    Reference →</a>
+            </div>
+        </footer>
+    </div>
+
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">↑</button>
+
+    <script>
+        // Show/hide back to top button
+        window.addEventListener('scroll', function () {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.docs-nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

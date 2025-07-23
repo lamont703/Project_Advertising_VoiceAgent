@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceAgent Wireframes</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .wireframes-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .wireframes-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e6ed;
+        }
+
+        .wireframe-section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .wireframe-card {
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .wireframe-mockup {
+            background: white;
+            margin: 1rem;
+            border-radius: 4px;
+            min-height: 400px;
+            position: relative;
+            border: 1px solid #ddd;
+        }
+
+        .mockup-header {
+            background: #f1f3f4;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .mockup-dot.red { background: #ff5f56; }
+        .mockup-dot.yellow { background: #ffbd2e; }
+        .mockup-dot.green { background: #27ca3f; }
+
+        .mockup-content {
+            padding: 1rem;
+            height: calc(100% - 40px);
+        }
+
+        .wireframe-element {
+            background: #e3f2fd;
+            border: 2px dashed #2196f3;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            text-align: center;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        .wireframe-button {
+            background: #bbdefb;
+            border: 2px solid #2196f3;
+            border-radius: 25px;
+            padding: 1rem 2rem;
+            margin: 1rem auto;
+            display: block;
+            width: fit-content;
+            cursor: pointer;
+        }
+
+        .wireframe-input {
+            background: white;
+            border: 2px dashed #9e9e9e;
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        .flow-diagram {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .flow-step {
+            background: white;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f8f9fa;
+            padding: 0 8px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .annotation {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .device-frame {
+            border: 8px solid #333;
+            border-radius: 20px;
+            background: white;
+            width: 300px;
+            height: 600px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .device-frame::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #333;
+            border-radius: 0 0 4px 4px;
+        }
+
+        @media (max-width: 768px) {
+            .wireframes-container {
+                padding: 1rem;
+            }
+
+            .wireframe-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .device-frame {
+                width: 250px;
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wireframes-container">
+        <header class="wireframes-header">
+            <h1>🎨 VoiceAgent Wireframes</h1>
+            <p>Visual design and user flow documentation</p>
+            <a href="index.html" style="color: #3498db; text-decoration: none;">← Back to Documentation</a>
+        </header>
+
+        <section class="wireframe-section">
+            <h2>📱 User Flow Overview</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <h3>1. Ad Click</h3>
+                    <p>User clicks on social media advertisement</p>
+                </div>
+                <div class="flow-step">
+                    <h3>2. Landing Page</h3>
+                    <p>Arrives at voice-enabled landing page</p>
+                </div>
+                <div class="flow-step">
+                    <h3>3. Voice Activation</h3>
+                    <p>Taps "Tap to Speak" button to begin</p>
+                </div>
+                <div class="flow-step">
+                    <h3>4. AI Conversation</h3>
+                    <p>Engages in guided voice conversation</p>
+                </div>
+                <div class="flow-step">
+                    <h3>5. Lead Capture</h3>
+                    <p>Provides contact information naturally</p>
+                </div>
+                <div class="flow-step">
+                    <h3>6. Qualification</h3>
+                    <p>Answers business-specific questions</p>
+                </div>
+                <div class="flow-step">
+                    <h3>7. CRM Integration</h3>
+                    <p>Data automatically sent to CRM system</p>
+                </div>
+                <div class="flow-step">
+                    <h3>8. Follow-up</h3>
+                    <p>Automated workflows trigger next steps</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="wireframe-section">
+            <h2>🏠 Landing Page Wireframe</h2>
+            <div class="wireframe-grid">
+                <div class="wireframe-card">
+                    <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Desktop Version</h3>
+                    <div class="wireframe-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <div class="mockup-dot red"></div>
+                                <div class="mockup-dot yellow"></div>
+                                <div class="mockup-dot green"></div>
+                            </div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="wireframe-element">LOGO & TAGLINE</div>
+                            <div class="wireframe-element" style="margin: 2rem 0;">
+                                <h3>HERO HEADING</h3>
+                                <p>Subtitle text explaining the process</p>
+                            </div>
+                            <div class="wireframe-button">🎙️ TAP TO SPEAK</div>
+                            <div class="wireframe-element" style="margin-top: 2rem;">
+                                <div style="display: flex; justify-content: space-around;">
+                                    <span>🎯 Feature 1</span>
+                                    <span>⚡ Feature 2</span>
+                                    <span>🔒 Feature 3</span>
+                                </div>
+                            </div>
+                            <div class="wireframe-element" style="margin-top: auto;">
+                                FOOTER LINKS: Docs | Wireframes | Admin | API
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wireframe-card">
+                    <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Mobile Version</h3>
+                    <div class="device-frame">
+                        <div style="padding: 1rem; height: 100%; display: flex; flex-direction: column;">
+                            <div class="wireframe-element">LOGO</div>
+                            <div class="wireframe-element" style="flex: 1; margin: 1rem 0;">
+                                <h4>HERO HEADING</h4>
+                                <p>Subtitle</p>
+                            </div>
+                            <div class="wireframe-button">🎙️ TAP TO SPEAK</div>
+                            <div class="wireframe-element">
+                                🎯 ⚡ 🔒<br>Features
+                            </div>
+                            <div class="wireframe-element" style="margin-top: auto; font-size: 0.8rem;">
+                                Footer Links
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Key Elements:</strong> Large, prominent voice activation button; Clear value proposition; Minimal text to reduce cognitive load; Mobile-first responsive design.
+            </div>
+        </section>
+
+        <section class="wireframe-section">
+            <h2>🎙️ Voice Interface Wireframe</h2>
+            <div class="wireframe-grid">
+                <div class="wireframe-card">
+                    <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Listening State</h3>
+                    <div class="device-frame">
+                        <div style="padding: 1rem; height: 100%; display: flex; flex-direction: column; text-align: center;">
+                            <div class="wireframe-element">PROGRESS BAR: 20%</div>
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="wireframe-element" style="border-radius: 50%; width: 120px; height: 120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; animation: pulse 1s infinite;">
+                                    AI AVATAR<br>🎤 LISTENING
+                                </div>
+                                <div class="wireframe-element" style="margin-top: 2rem;">
+                                    "Hi! I'm Sarah, your virtual assistant. What's your name?"
+                                </div>
+                            </div>
+                            <div class="wireframe-element">STATUS: Listening for your response...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wireframe-card">
+                    <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Processing State</h3>
+                    <div class="device-frame">
+                        <div style="padding: 1rem; height: 100%; display: flex; flex-direction: column; text-align: center;">
+                            <div class="wireframe-element">PROGRESS BAR: 40%</div>
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="wireframe-element" style="border-radius: 50%; width: 120px; height: 120px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                                    AI AVATAR<br>⚙️ THINKING
+                                </div>
+                                <div class="wireframe-element" style="margin-top: 1rem; background: #e8f5e8;">
+                                    USER: "My name is John Smith"
+                                </div>
+                                <div class="wireframe-element" style="margin-top: 1rem;">
+                                    "Nice to meet you John! What's the best email to reach you?"
+                                </div>
+                            </div>
+                            <div class="wireframe-element">STATUS: Processing your response...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wireframe-card">
+                    <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Completion State</h3>
+                    <div class="device-frame">
+                        <div style="padding: 1rem; height: 100%; display: flex; flex-direction: column; text-align: center;">
+                            <div class="wireframe-element">PROGRESS BAR: 100% ✅</div>
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="wireframe-element" style="border-radius: 50%; width: 120px; height: 120px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                                    AI AVATAR<br>✅ COMPLETE
+                                </div>
+                                <div class="wireframe-element" style="margin-top: 2rem;">
+                                    "Thank you John! We'll be in touch within 24 hours with a personalized solution."
+                                </div>
+                                <div class="wireframe-button" style="margin-top: 1rem;">
+                                    START ANOTHER CONVERSATION
+                                </div>
+                            </div>
+                            <div class="wireframe-element">Lead captured successfully!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Voice Interface Features:</strong> Visual feedback during all conversation states; Progress tracking; Clear status messages; Responsive avatar animations; Conversation history display.
+            </div>
+        </section>
+
+        <section class="wireframe-section">
+            <h2>⚙️ Admin Dashboard Wireframe</h2>
+            <div class="wireframe-card">
+                <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Dashboard Overview</h3>
+                <div class="wireframe-mockup" style="min-height: 600px;">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <div class="mockup-dot red"></div>
+                            <div class="mockup-dot yellow"></div>
+                            <div class="mockup-dot green"></div>
+                        </div>
+                        <span style="margin-left: 1rem; color: #666;">VoiceAgent Admin Panel</span>
+                    </div>
+                    <div class="mockup-content">
+                        <!-- Top Navigation -->
+                        <div class="wireframe-element" style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <div>LOGO</div>
+                            <div>Dashboard | Agent Config | Workflows | Integrations | Leads | Analytics</div>
+                            <div>USER MENU</div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                            <div class="wireframe-element">
+                                <strong>150</strong><br>
+                                Total Conversations
+                            </div>
+                            <div class="wireframe-element">
+                                <strong>98</strong><br>
+                                Leads Captured
+                            </div>
+                            <div class="wireframe-element">
+                                <strong>65%</strong><br>
+                                Conversion Rate
+                            </div>
+                            <div class="wireframe-element">
+                                <strong>$12,500</strong><br>
+                                Revenue Generated
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                            <div>
+                                <div class="wireframe-element" style="height: 200px;">
+                                    <strong>RECENT ACTIVITY FEED</strong><br><br>
+                                    • New lead: John Smith (2 min ago)<br>
+                                    • Conversation completed (5 min ago)<br>
+                                    • Workflow triggered (8 min ago)<br>
+                                    • Integration sync (15 min ago)<br>
+                                </div>
+                                <div class="wireframe-element" style="height: 150px; margin-top: 1rem;">
+                                    <strong>PERFORMANCE CHART</strong><br>
+                                    [Conversion Rate Over Time Graph]
+                                </div>
+                            </div>
+                            <div>
+                                <div class="wireframe-element" style="height: 150px;">
+                                    <strong>QUICK ACTIONS</strong><br><br>
+                                    ▶️ Test Agent<br>
+                                    ⚙️ Agent Config<br>
+                                    📊 View Analytics<br>
+                                    📥 Export Leads
+                                </div>
+                                <div class="wireframe-element" style="height: 150px; margin-top: 1rem;">
+                                    <strong>SYSTEM STATUS</strong><br><br>
+                                    🟢 Voice API: Online<br>
+                                    🟢 CRM Sync: Active<br>
+                                    🟡 n8n: 2 workflows<br>
+                                    🟢 Analytics: Tracking
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Admin Features:</strong> Real-time metrics display; Activity monitoring; Quick action buttons; System status indicators; Responsive grid layout for different screen sizes.
+            </div>
+        </section>
+
+        <section class="wireframe-section">
+            <h2>📋 Leads Management Wireframe</h2>
+            <div class="wireframe-card">
+                <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Leads Table View</h3>
+                <div class="wireframe-mockup" style="min-height: 500px;">
+                    <div class="mockup-content">
+                        <!-- Filters and Search -->
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <div class="wireframe-element" style="width: 200px;">
+                                🔍 SEARCH LEADS
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <div class="wireframe-element">DATE FILTER</div>
+                                <div class="wireframe-element">STATUS FILTER</div>
+                                <div class="wireframe-element">SOURCE FILTER</div>
+                                <div class="wireframe-button">📥 EXPORT CSV</div>
+                            </div>
+                        </div>
+
+                        <!-- Leads Table -->
+                        <div class="wireframe-element" style="height: 300px;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: #f1f3f4; text-align: left;">
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">☑️</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Name</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Email</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Phone</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Status</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Source</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Date</th>
+                                        <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">☑️</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">John Smith</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">john@example.com</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">+1-555-0123</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">🟢 Qualified</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">Facebook Ad</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">Jan 15, 2024</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">👁️ 📝 🗑️</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">☑️</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">Sarah Johnson</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">sarah@example.com</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">+1-555-0124</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">🟡 Pending</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">Google Ad</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">Jan 15, 2024</td>
+                                        <td style="padding: 0.5rem; border: 1px solid #ddd;">👁️ 📝 🗑️</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Bulk Actions -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                            <div class="wireframe-element">
+                                BULK ACTIONS: Mark as Qualified | Export Selected | Delete Selected
+                            </div>
+                            <div class="wireframe-element">
+                                PAGE 1 of 10 | ← Previous | Next →
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Leads Management Features:</strong> Advanced filtering and search; Bulk operations; Export functionality; Pagination; Status tracking; Source attribution; Action buttons for quick operations.
+            </div>
+        </section>
+
+        <section class="wireframe-section">
+            <h2>🔧 Agent Configuration Wireframe</h2>
+            <div class="wireframe-card">
+                <h3 style="padding: 1rem; margin: 0; background: #f1f3f4; border-bottom: 1px solid #ddd;">Agent Settings Form</h3>
+                <div class="wireframe-mockup" style="min-height: 600px;">
+                    <div class="mockup-content">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                            <!-- Left Column -->
+                            <div>
+                                <div class="wireframe-element">
+                                    <h4>BASIC SETTINGS</h4>
+                                    <div class="wireframe-input">Agent Name: [Sarah]</div>
+                                    <div class="wireframe-input">Voice Style: [Professional ▼]</div>
+                                    <div class="wireframe-input">Personality: [Friendly ▼]</div>
+                                </div>
+
+                                <div class="wireframe-element" style="margin-top: 1rem;">
+                                    <h4>GREETING MESSAGE</h4>
+                                    <div class="wireframe-input" style="height: 80px;">
+                                        "Hi! I'm Sarah, your virtual assistant. I'm here to learn about your business needs..."
+                                    </div>
+                                </div>
+
+                                <div class="wireframe-element" style="margin-top: 1rem;">
+                                    <h4>QUALIFICATION QUESTIONS</h4>
+                                    <div class="wireframe-input">1. What's your name?</div>
+                                    <div class="wireframe-input">2. What's your email address?</div>
+                                    <div class="wireframe-input">3. What's your phone number?</div>
+                                    <div class="wireframe-button" style="margin: 0.5rem 0;">+ ADD QUESTION</div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div>
+                                <div class="wireframe-element">
+                                    <h4>PREVIEW</h4>
+                                    <div style="border: 2px dashed #ccc; padding: 2rem; text-align: center; height: 200px;">
+                                        AGENT PREVIEW<br><br>
+                                        🤖 Avatar<br>
+                                        "Hi! I'm Sarah..."<br><br>
+                                        🎙️ [Test Voice]
+                                    </div>
+                                </div>
+
+                                <div class="wireframe-element" style="margin-top: 1rem;">
+                                    <h4>ADVANCED SETTINGS</h4>
+                                    <div class="wireframe-input">Response Delay: [1.5s]</div>
+                                    <div class="wireframe-input">Max Conversation Time: [10 min]</div>
+                                    <div class="wireframe-input">Fallback Behavior: [Email Capture ▼]</div>
+                                </div>
+
+                                <div class="wireframe-element" style="margin-top: 1rem;">
+                                    <h4>ACTIONS</h4>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <div class="wireframe-button">💾 SAVE CONFIG</div>
+                                        <div class="wireframe-button">🧪 TEST AGENT</div>
+                                        <div class="wireframe-button">🔄 RESET</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Configuration Features:</strong> Live preview of changes; Drag-and-drop question ordering; Voice testing capability; Advanced timing controls; Reset to defaults option.
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem; border-top: 1px solid #e0e6ed; margin-top: 3rem;">
+            <p style="color: #7f8c8d;">© 2024 VoiceAgent Wireframes. Visual design documentation.</p>
+            <div style="margin-top: 1rem;">
+                <a href="index.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">← Back to Documentation</a>
+                <a href="../index.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">← Back to VoiceAgent</a>
+                <a href="api-reference.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">API Reference →</a>
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</body>
+
+</html> 

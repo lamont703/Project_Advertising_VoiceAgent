@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceAgent API Reference</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .api-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .api-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e6ed;
+        }
+
+        .api-nav {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .api-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .api-nav a {
+            color: #3498db;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .api-nav a:hover {
+            background-color: #e3f2fd;
+        }
+
+        .api-section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .api-section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .endpoint {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #e0e6ed;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .http-method {
+            background: #27ae60;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .http-method.post { background: #3498db; }
+        .http-method.put { background: #f39c12; }
+        .http-method.delete { background: #e74c3c; }
+
+        .endpoint-url {
+            background: #2c3e50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .code-block .comment {
+            color: #95a5a6;
+        }
+
+        .code-block .string {
+            color: #2ecc71;
+        }
+
+        .code-block .number {
+            color: #e67e22;
+        }
+
+        .code-block .keyword {
+            color: #3498db;
+        }
+
+        .parameter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+        }
+
+        .parameter-table th,
+        .parameter-table td {
+            border: 1px solid #e0e6ed;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .parameter-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .parameter-table .required {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .parameter-table .optional {
+            color: #95a5a6;
+        }
+
+        .response-example {
+            background: #e8f5e8;
+            border: 1px solid #2ecc71;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .error-example {
+            background: #fdf2f2;
+            border: 1px solid #e74c3c;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .auth-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .auth-info h4 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .rate-limit {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e6ed;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            border-bottom-color: #3498db;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .api-container {
+                padding: 1rem;
+            }
+
+            .endpoint-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .endpoint-url {
+                min-width: auto;
+            }
+
+            .api-nav ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="api-container">
+        <header class="api-header">
+            <h1>🔧 VoiceAgent API Reference</h1>
+            <p>Complete API documentation for developers and integrators</p>
+            <a href="index.html" style="color: #3498db; text-decoration: none;">← Back to Documentation</a>
+        </header>
+
+        <nav class="api-nav">
+            <ul>
+                <li><a href="#overview">API Overview</a></li>
+                <li><a href="#authentication">Authentication</a></li>
+                <li><a href="#conversations">Conversations</a></li>
+                <li><a href="#leads">Lead Management</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#webhooks">Webhooks</a></li>
+                <li><a href="#errors">Error Handling</a></li>
+            </ul>
+        </nav>
+
+        <section id="overview" class="api-section">
+            <h2>📋 API Overview</h2>
+            <p>The VoiceAgent API provides programmatic access to all core functionality including conversation management, lead capture, agent configuration, and analytics data.</p>
+
+            <h3>Base URL</h3>
+            <div class="code-block">
+https://api.voiceagent.com/v1
+            </div>
+
+            <h3>Content Type</h3>
+            <p>All API requests should include the following headers:</p>
+            <div class="code-block">
+Content-Type: application/json
+Accept: application/json
+            </div>
+
+            <div class="auth-info">
+                <h4>🔐 API Keys Required</h4>
+                <p>All endpoints require authentication via API key. Obtain your API key from the admin panel under Integrations → API Settings.</p>
+            </div>
+
+            <div class="rate-limit">
+                <strong>Rate Limits:</strong> 1000 requests per hour per API key. Contact support for higher limits.
+            </div>
+        </section>
+
+        <section id="authentication" class="api-section">
+            <h2>🔐 Authentication</h2>
+            <p>VoiceAgent uses API key authentication. Include your API key in the Authorization header:</p>
+
+            <div class="code-block">
+Authorization: Bearer YOUR_API_KEY
+            </div>
+
+            <h3>Obtaining API Keys</h3>
+            <ol>
+                <li>Log in to the VoiceAgent Admin Panel</li>
+                <li>Navigate to Integrations → API Settings</li>
+                <li>Click "Generate New API Key"</li>
+                <li>Copy and securely store your API key</li>
+            </ol>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method post">POST</span>
+                    <span class="endpoint-url">/auth/validate</span>
+                </div>
+                <p>Validate your API key and get account information.</p>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab(event, 'auth-request')">Request</button>
+                    <button class="tab" onclick="showTab(event, 'auth-response')">Response</button>
+                </div>
+
+                <div id="auth-request" class="tab-content active">
+                    <div class="code-block">
+curl -X POST https://api.voiceagent.com/v1/auth/validate \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+                    </div>
+                </div>
+
+                <div id="auth-response" class="tab-content">
+                    <div class="response-example">
+                        <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"account_id"</span>: <span class="string">"acc_12345"</span>,
+    <span class="string">"account_name"</span>: <span class="string">"Your Company"</span>,
+    <span class="string">"plan"</span>: <span class="string">"pro"</span>,
+    <span class="string">"rate_limit"</span>: {
+      <span class="string">"requests_per_hour"</span>: <span class="number">1000</span>,
+      <span class="string">"remaining"</span>: <span class="number">995</span>
+    }
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conversations" class="api-section">
+            <h2>💬 Conversations API</h2>
+            <p>Manage voice conversations, track progress, and retrieve conversation data.</p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method post">POST</span>
+                    <span class="endpoint-url">/conversations/start</span>
+                </div>
+                <p>Initialize a new voice conversation session.</p>
+
+                <table class="parameter-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>source</td>
+                            <td>string</td>
+                            <td class="optional">Optional</td>
+                            <td>Traffic source (e.g., "facebook-ad", "google-ad")</td>
+                        </tr>
+                        <tr>
+                            <td>campaign_id</td>
+                            <td>string</td>
+                            <td class="optional">Optional</td>
+                            <td>Marketing campaign identifier</td>
+                        </tr>
+                        <tr>
+                            <td>user_agent</td>
+                            <td>string</td>
+                            <td class="optional">Optional</td>
+                            <td>User's browser user agent string</td>
+                        </tr>
+                        <tr>
+                            <td>ip_address</td>
+                            <td>string</td>
+                            <td class="optional">Optional</td>
+                            <td>User's IP address for geolocation</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab(event, 'conv-start-req')">Request</button>
+                    <button class="tab" onclick="showTab(event, 'conv-start-res')">Response</button>
+                </div>
+
+                <div id="conv-start-req" class="tab-content active">
+                    <div class="code-block">
+curl -X POST https://api.voiceagent.com/v1/conversations/start \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    <span class="string">"source"</span>: <span class="string">"facebook-ad"</span>,
+    <span class="string">"campaign_id"</span>: <span class="string">"camp_abc123"</span>,
+    <span class="string">"ip_address"</span>: <span class="string">"192.168.1.1"</span>
+  }'
+                    </div>
+                </div>
+
+                <div id="conv-start-res" class="tab-content">
+                    <div class="response-example">
+                        <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"conversation_id"</span>: <span class="string">"conv_67890"</span>,
+    <span class="string">"session_token"</span>: <span class="string">"sess_token_xyz"</span>,
+    <span class="string">"agent_greeting"</span>: <span class="string">"Hi! I'm Sarah, your virtual assistant..."</span>,
+    <span class="string">"websocket_url"</span>: <span class="string">"wss://ws.voiceagent.com/v1/conversations/conv_67890"</span>
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method post">POST</span>
+                    <span class="endpoint-url">/conversations/{id}/message</span>
+                </div>
+                <p>Send a message or voice input to an active conversation.</p>
+
+                <table class="parameter-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>message</td>
+                            <td>string</td>
+                            <td class="required">Required</td>
+                            <td>Text transcript of user's voice input</td>
+                        </tr>
+                        <tr>
+                            <td>audio_data</td>
+                            <td>string</td>
+                            <td class="optional">Optional</td>
+                            <td>Base64 encoded audio data</td>
+                        </tr>
+                        <tr>
+                            <td>confidence</td>
+                            <td>number</td>
+                            <td class="optional">Optional</td>
+                            <td>Speech recognition confidence (0-1)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab(event, 'conv-msg-req')">Request</button>
+                    <button class="tab" onclick="showTab(event, 'conv-msg-res')">Response</button>
+                </div>
+
+                <div id="conv-msg-req" class="tab-content active">
+                    <div class="code-block">
+curl -X POST https://api.voiceagent.com/v1/conversations/conv_67890/message \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    <span class="string">"message"</span>: <span class="string">"My name is John Smith"</span>,
+    <span class="string">"confidence"</span>: <span class="number">0.95</span>
+  }'
+                    </div>
+                </div>
+
+                <div id="conv-msg-res" class="tab-content">
+                    <div class="response-example">
+                        <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"agent_response"</span>: <span class="string">"Nice to meet you John! What's the best email to reach you?"</span>,
+    <span class="string">"audio_url"</span>: <span class="string">"https://audio.voiceagent.com/responses/resp_123.mp3"</span>,
+    <span class="string">"progress"</span>: <span class="number">40</span>,
+    <span class="string">"next_step"</span>: <span class="string">"email_capture"</span>,
+    <span class="string">"extracted_data"</span>: {
+      <span class="string">"name"</span>: <span class="string">"John Smith"</span>
+    }
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method">GET</span>
+                    <span class="endpoint-url">/conversations/{id}</span>
+                </div>
+                <p>Retrieve complete conversation details and transcript.</p>
+
+                <div class="response-example">
+                    <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"conversation_id"</span>: <span class="string">"conv_67890"</span>,
+    <span class="string">"status"</span>: <span class="string">"completed"</span>,
+    <span class="string">"created_at"</span>: <span class="string">"2024-01-15T10:30:00Z"</span>,
+    <span class="string">"completed_at"</span>: <span class="string">"2024-01-15T10:33:45Z"</span>,
+    <span class="string">"duration"</span>: <span class="number">225</span>,
+    <span class="string">"source"</span>: <span class="string">"facebook-ad"</span>,
+    <span class="string">"transcript"</span>: [
+      {
+        <span class="string">"speaker"</span>: <span class="string">"agent"</span>,
+        <span class="string">"message"</span>: <span class="string">"Hi! I'm Sarah, your virtual assistant..."</span>,
+        <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:30:00Z"</span>
+      },
+      {
+        <span class="string">"speaker"</span>: <span class="string">"user"</span>,
+        <span class="string">"message"</span>: <span class="string">"My name is John Smith"</span>,
+        <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:30:15Z"</span>
+      }
+    ],
+    <span class="string">"captured_data"</span>: {
+      <span class="string">"name"</span>: <span class="string">"John Smith"</span>,
+      <span class="string">"email"</span>: <span class="string">"john@example.com"</span>,
+      <span class="string">"phone"</span>: <span class="string">"+1-555-0123"</span>
+    }
+  }
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leads" class="api-section">
+            <h2>👥 Lead Management API</h2>
+            <p>Create, retrieve, update, and manage captured leads.</p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method">GET</span>
+                    <span class="endpoint-url">/leads</span>
+                </div>
+                <p>Retrieve a paginated list of captured leads with filtering options.</p>
+
+                <table class="parameter-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>page</td>
+                            <td>integer</td>
+                            <td>Page number (default: 1)</td>
+                        </tr>
+                        <tr>
+                            <td>limit</td>
+                            <td>integer</td>
+                            <td>Results per page (default: 50, max: 100)</td>
+                        </tr>
+                        <tr>
+                            <td>status</td>
+                            <td>string</td>
+                            <td>Filter by status: "new", "qualified", "contacted", "converted"</td>
+                        </tr>
+                        <tr>
+                            <td>source</td>
+                            <td>string</td>
+                            <td>Filter by traffic source</td>
+                        </tr>
+                        <tr>
+                            <td>date_from</td>
+                            <td>string</td>
+                            <td>Start date (ISO 8601 format)</td>
+                        </tr>
+                        <tr>
+                            <td>date_to</td>
+                            <td>string</td>
+                            <td>End date (ISO 8601 format)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="response-example">
+                    <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"leads"</span>: [
+      {
+        <span class="string">"id"</span>: <span class="string">"lead_12345"</span>,
+        <span class="string">"name"</span>: <span class="string">"John Smith"</span>,
+        <span class="string">"email"</span>: <span class="string">"john@example.com"</span>,
+        <span class="string">"phone"</span>: <span class="string">"+1-555-0123"</span>,
+        <span class="string">"status"</span>: <span class="string">"qualified"</span>,
+        <span class="string">"source"</span>: <span class="string">"facebook-ad"</span>,
+        <span class="string">"created_at"</span>: <span class="string">"2024-01-15T10:33:45Z"</span>,
+        <span class="string">"qualification_score"</span>: <span class="number">85</span>,
+        <span class="string">"conversation_id"</span>: <span class="string">"conv_67890"</span>
+      }
+    ],
+    <span class="string">"pagination"</span>: {
+      <span class="string">"current_page"</span>: <span class="number">1</span>,
+      <span class="string">"total_pages"</span>: <span class="number">10</span>,
+      <span class="string">"total_leads"</span>: <span class="number">500</span>,
+      <span class="string">"per_page"</span>: <span class="number">50</span>
+    }
+  }
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method">GET</span>
+                    <span class="endpoint-url">/leads/{id}</span>
+                </div>
+                <p>Retrieve detailed information about a specific lead.</p>
+
+                <div class="response-example">
+                    <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"id"</span>: <span class="string">"lead_12345"</span>,
+    <span class="string">"contact_info"</span>: {
+      <span class="string">"name"</span>: <span class="string">"John Smith"</span>,
+      <span class="string">"email"</span>: <span class="string">"john@example.com"</span>,
+      <span class="string">"phone"</span>: <span class="string">"+1-555-0123"</span>
+    },
+    <span class="string">"qualification_data"</span>: {
+      <span class="string">"business_type"</span>: <span class="string">"E-commerce"</span>,
+      <span class="string">"monthly_revenue"</span>: <span class="string">"$10k-50k"</span>,
+      <span class="string">"main_challenge"</span>: <span class="string">"Lead generation"</span>
+    },
+    <span class="string">"metadata"</span>: {
+      <span class="string">"source"</span>: <span class="string">"facebook-ad"</span>,
+      <span class="string">"campaign_id"</span>: <span class="string">"camp_abc123"</span>,
+      <span class="string">"created_at"</span>: <span class="string">"2024-01-15T10:33:45Z"</span>,
+      <span class="string">"conversation_duration"</span>: <span class="number">225</span>,
+      <span class="string">"qualification_score"</span>: <span class="number">85</span>
+    },
+    <span class="string">"status"</span>: <span class="string">"qualified"</span>,
+    <span class="string">"tags"</span>: [<span class="string">"high-value"</span>, <span class="string">"ecommerce"</span>],
+    <span class="string">"notes"</span>: <span class="string">"Expressed strong interest in automation tools"</span>
+  }
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method put">PUT</span>
+                    <span class="endpoint-url">/leads/{id}</span>
+                </div>
+                <p>Update lead information, status, or add notes and tags.</p>
+
+                <table class="parameter-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>status</td>
+                            <td>string</td>
+                            <td>Update lead status</td>
+                        </tr>
+                        <tr>
+                            <td>tags</td>
+                            <td>array</td>
+                            <td>Array of tag strings</td>
+                        </tr>
+                        <tr>
+                            <td>notes</td>
+                            <td>string</td>
+                            <td>Additional notes about the lead</td>
+                        </tr>
+                        <tr>
+                            <td>assigned_to</td>
+                            <td>string</td>
+                            <td>Assign lead to team member</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="configuration" class="api-section">
+            <h2>⚙️ Configuration API</h2>
+            <p>Manage agent settings, conversation flows, and system configuration.</p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method">GET</span>
+                    <span class="endpoint-url">/config/agent</span>
+                </div>
+                <p>Retrieve current agent configuration settings.</p>
+
+                <div class="response-example">
+                    <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"agent_name"</span>: <span class="string">"Sarah"</span>,
+    <span class="string">"personality"</span>: <span class="string">"friendly"</span>,
+    <span class="string">"voice_style"</span>: <span class="string">"professional"</span>,
+    <span class="string">"greeting_message"</span>: <span class="string">"Hi! I'm Sarah, your virtual assistant..."</span>,
+    <span class="string">"qualification_questions"</span>: [
+      <span class="string">"What's your name?"</span>,
+      <span class="string">"What's your email address?"</span>,
+      <span class="string">"What type of business do you run?"</span>
+    ],
+    <span class="string">"conversation_settings"</span>: {
+      <span class="string">"max_duration"</span>: <span class="number">600</span>,
+      <span class="string">"response_delay"</span>: <span class="number">1.5</span>,
+      <span class="string">"fallback_behavior"</span>: <span class="string">"email_capture"</span>
+    }
+  }
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method put">PUT</span>
+                    <span class="endpoint-url">/config/agent</span>
+                </div>
+                <p>Update agent configuration settings.</p>
+
+                <div class="code-block">
+curl -X PUT https://api.voiceagent.com/v1/config/agent \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    <span class="string">"agent_name"</span>: <span class="string">"Sarah"</span>,
+    <span class="string">"personality"</span>: <span class="string">"professional"</span>,
+    <span class="string">"greeting_message"</span>: <span class="string">"Hello! I'm here to help you find the perfect solution..."</span>
+  }'
+                </div>
+            </div>
+        </section>
+
+        <section id="analytics" class="api-section">
+            <h2>📊 Analytics API</h2>
+            <p>Access performance metrics, conversion data, and detailed analytics.</p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="http-method">GET</span>
+                    <span class="endpoint-url">/analytics/overview</span>
+                </div>
+                <p>Get high-level performance metrics for a specified time period.</p>
+
+                <table class="parameter-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>period</td>
+                            <td>string</td>
+                            <td>"today", "week", "month", "quarter", or "custom"</td>
+                        </tr>
+                        <tr>
+                            <td>start_date</td>
+                            <td>string</td>
+                            <td>Start date for custom periods (ISO 8601)</td>
+                        </tr>
+                        <tr>
+                            <td>end_date</td>
+                            <td>string</td>
+                            <td>End date for custom periods (ISO 8601)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="response-example">
+                    <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"period"</span>: <span class="string">"month"</span>,
+    <span class="string">"metrics"</span>: {
+      <span class="string">"total_conversations"</span>: <span class="number">1250</span>,
+      <span class="string">"completed_conversations"</span>: <span class="number">1100</span>,
+      <span class="string">"leads_captured"</span>: <span class="number">850</span>,
+      <span class="string">"conversion_rate"</span>: <span class="number">68.0</span>,
+      <span class="string">"average_duration"</span>: <span class="number">185</span>,
+      <span class="string">"completion_rate"</span>: <span class="number">88.0</span>
+    },
+    <span class="string">"sources"</span>: {
+      <span class="string">"facebook-ad"</span>: <span class="number">450</span>,
+      <span class="string">"google-ad"</span>: <span class="number">320</span>,
+      <span class="string">"linkedin-ad"</span>: <span class="number">280</span>
+    },
+    <span class="string">"trends"</span>: {
+      <span class="string">"conversations_growth"</span>: <span class="number">15.2</span>,
+      <span class="string">"conversion_growth"</span>: <span class="number">8.7</span>
+    }
+  }
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="webhooks" class="api-section">
+            <h2>🔗 Webhooks</h2>
+            <p>Configure webhook endpoints to receive real-time notifications about events in your VoiceAgent system.</p>
+
+            <h3>Supported Events</h3>
+            <ul>
+                <li><strong>conversation.started</strong> - New conversation initiated</li>
+                <li><strong>conversation.completed</strong> - Conversation finished successfully</li>
+                <li><strong>lead.captured</strong> - New lead information captured</li>
+                <li><strong>lead.qualified</strong> - Lead marked as qualified</li>
+                <li><strong>integration.sync</strong> - Data synchronized with external system</li>
+            </ul>
+
+            <h3>Webhook Payload Example</h3>
+            <div class="code-block">
+{
+  <span class="string">"event"</span>: <span class="string">"lead.captured"</span>,
+  <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:33:45Z"</span>,
+  <span class="string">"data"</span>: {
+    <span class="string">"lead_id"</span>: <span class="string">"lead_12345"</span>,
+    <span class="string">"conversation_id"</span>: <span class="string">"conv_67890"</span>,
+    <span class="string">"contact_info"</span>: {
+      <span class="string">"name"</span>: <span class="string">"John Smith"</span>,
+      <span class="string">"email"</span>: <span class="string">"john@example.com"</span>,
+      <span class="string">"phone"</span>: <span class="string">"+1-555-0123"</span>
+    },
+    <span class="string">"source"</span>: <span class="string">"facebook-ad"</span>,
+    <span class="string">"qualification_score"</span>: <span class="number">85</span>
+  }
+}
+            </div>
+
+            <div class="auth-info">
+                <h4>🔐 Webhook Security</h4>
+                <p>All webhook payloads are signed with HMAC-SHA256. Verify the signature using the webhook secret provided in your admin panel.</p>
+            </div>
+        </section>
+
+        <section id="errors" class="api-section">
+            <h2>❌ Error Handling</h2>
+            <p>The VoiceAgent API uses conventional HTTP response codes and returns detailed error information in JSON format.</p>
+
+            <h3>HTTP Status Codes</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>OK - Request successful</td>
+                    </tr>
+                    <tr>
+                        <td>201</td>
+                        <td>Created - Resource created successfully</td>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request - Invalid request parameters</td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td>Unauthorized - Invalid or missing API key</td>
+                    </tr>
+                    <tr>
+                        <td>403</td>
+                        <td>Forbidden - Insufficient permissions</td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>Not Found - Resource not found</td>
+                    </tr>
+                    <tr>
+                        <td>429</td>
+                        <td>Too Many Requests - Rate limit exceeded</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Server Error - Server error</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Error Response Format</h3>
+            <div class="error-example">
+                <div class="code-block">
+{
+  <span class="string">"status"</span>: <span class="string">"error"</span>,
+  <span class="string">"error"</span>: {
+    <span class="string">"code"</span>: <span class="string">"invalid_parameter"</span>,
+    <span class="string">"message"</span>: <span class="string">"The email parameter is required but was not provided"</span>,
+    <span class="string">"details"</span>: {
+      <span class="string">"parameter"</span>: <span class="string">"email"</span>,
+      <span class="string">"expected_type"</span>: <span class="string">"string"</span>
+    }
+  },
+  <span class="string">"request_id"</span>: <span class="string">"req_abc123def456"</span>
+}
+                </div>
+            </div>
+
+            <h3>Common Error Codes</h3>
+            <ul>
+                <li><strong>invalid_api_key</strong> - API key is missing or invalid</li>
+                <li><strong>rate_limit_exceeded</strong> - Too many requests in time window</li>
+                <li><strong>invalid_parameter</strong> - Required parameter missing or invalid</li>
+                <li><strong>resource_not_found</strong> - Requested resource doesn't exist</li>
+                <li><strong>conversation_expired</strong> - Conversation session has expired</li>
+                <li><strong>insufficient_permissions</strong> - API key lacks required permissions</li>
+            </ul>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem; border-top: 1px solid #e0e6ed; margin-top: 3rem;">
+            <p style="color: #7f8c8d;">© 2024 VoiceAgent API Reference. Last updated: January 2024</p>
+            <div style="margin-top: 1rem;">
+                <a href="index.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">← Back to Documentation</a>
+                <a href="../index.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">← Back to VoiceAgent</a>
+                <a href="wireframes.html" style="color: #3498db; text-decoration: none; margin: 0 1rem;">View Wireframes →</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(event, tabId) {
+            // Hide all tab contents
+            const tabContents = event.target.parentElement.parentElement.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = event.target.parentElement.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content and mark tab as active
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.api-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html> 

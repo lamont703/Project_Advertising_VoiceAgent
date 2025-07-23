@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Agent - Talk to Get Started</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>VoiceAgent</h1>
+                <span class="tagline">Intelligent Lead Capture</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="hero-section">
+                <h2>Ready to get started?</h2>
+                <p class="subtitle">Tap the button below and tell us about your needs</p>
+
+                <div class="voice-interface">
+                    <button id="talkButton" class="talk-button" onclick="startVoiceConversation()">
+                        <div class="mic-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2C10.3431 2 9 3.34315 9 5V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V5C15 3.34315 13.6569 2 12 2Z"
+                                    fill="white" />
+                                <path
+                                    d="M19 10V12C19 16.4183 15.4183 20 11 20H9V22H11C16.5228 22 21 17.5228 21 12V10H19Z"
+                                    fill="white" />
+                                <path d="M5 10V12C5 17.5228 9.47715 22 15 22H17V20H15C10.5817 20 7 16.4183 7 12V10H5Z"
+                                    fill="white" />
+                                <path d="M11 20H13V22H11V20Z" fill="white" />
+                            </svg>
+                        </div>
+                        <span class="button-text">Tap to Speak</span>
+                    </button>
+
+                    <div id="statusText" class="status-text">Tap the button and start speaking</div>
+                </div>
+
+                <div class="features-preview">
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <span>Personalized Solutions</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <span>Instant Response</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <span>Secure & Private</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="docs/index.html">📖 Documentation</a>
+                <a href="docs/wireframes.html">🎨 Wireframes</a>
+                <a href="admin.html">⚙️ Admin Panel</a>
+                <a href="docs/api-reference.html">🔧 API Reference</a>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2024 VoiceAgent. Powered by AI & n8n Integration.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
