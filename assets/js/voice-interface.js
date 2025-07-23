@@ -122,21 +122,48 @@ function displayInitialMessage() {
 
 // Start the conversation flow
 function startConversationFlow() {
+    console.log('Starting conversation flow...'); // Debug log
+    
     // Clear the initial HTML message first
     const conversationFlow = document.getElementById('conversationFlow');
     conversationFlow.innerHTML = '';
     
     // Immediately start the agent speaking
     setTimeout(() => {
+        console.log('About to ask first question...'); // Debug log
         askNextQuestion();
-    }, 500); // Reduced delay for quicker response
+    }, 100); // Reduced delay even more
+    
+    // Fallback: If nothing happens after 2 seconds, force start
+    setTimeout(() => {
+        if (conversationFlow.children.length === 0) {
+            console.log('Forcing conversation start...'); // Debug log
+            forceStartConversation();
+        }
+    }, 2000);
+}
+
+// Force start conversation if automatic start fails
+function forceStartConversation() {
+    const question = qualificationQuestions[0];
+    if (question) {
+        speakAndDisplay(question.question);
+    }
 }
 
 // Ask the next qualification question
 function askNextQuestion() {
     if (currentQuestionIndex < qualificationQuestions.length) {
         const question = qualificationQuestions[currentQuestionIndex];
+        console.log('Asking question:', question.question); // Debug log
         speakAndDisplay(question.question);
+        
+        // In demo mode, automatically provide responses after agent speaks
+        if (demoMode && currentQuestionIndex < demoResponses.length) {
+            setTimeout(() => {
+                simulateUserResponse();
+            }, 4000); // Give time for agent to finish speaking
+        }
     } else {
         // All questions completed
         completeLeadCapture();
@@ -180,6 +207,7 @@ function handleUserResponse(transcript) {
 
 // Speak text and display message
 function speakAndDisplay(text) {
+    console.log('Speaking and displaying:', text); // Debug log
     addMessageToConversation('agent', text);
     speakText(text);
 }
@@ -536,23 +564,7 @@ function simulateUserResponse() {
     }
 }
 
-// Enhanced askNextQuestion with demo support
-function askNextQuestion() {
-    if (currentQuestionIndex < qualificationQuestions.length) {
-        const question = qualificationQuestions[currentQuestionIndex];
-        speakAndDisplay(question.question);
-        
-        // In demo mode, automatically provide responses after agent speaks
-        if (demoMode && currentQuestionIndex < demoResponses.length) {
-            setTimeout(() => {
-                simulateUserResponse();
-            }, 4000); // Give time for agent to finish speaking
-        }
-    } else {
-        // All questions completed
-        completeLeadCapture();
-    }
-}
+// This duplicate function has been removed - using the first one above
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {

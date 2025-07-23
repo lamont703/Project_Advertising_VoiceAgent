@@ -32,7 +32,10 @@
                     <h3 id="agentName">Alex</h3>
                     <p class="agent-title">AI Voice Agent Demo</p>
                     <div class="demo-status" id="demoStatus">
-                        Agent will start speaking in just a moment...
+                        🎙️ Starting conversation...
+                        <button onclick="startConversationNow()" style="background: #4CAF50; color: white; border: none; padding: 4px 12px; border-radius: 6px; margin-left: 8px; cursor: pointer;">
+                            Start Now
+                        </button>
                     </div>
                 </div>
 
@@ -108,28 +111,94 @@
     <script src="assets/js/voice-interface.js"></script>
 
     <script>
-        // Check if agent started speaking successfully
-        setTimeout(() => {
-            const statusElement = document.getElementById('demoStatus');
-            if (!window.speechSynthesis.speaking && !isAgentSpeaking) {
-                statusElement.innerHTML = `
-                    <div style="background: rgba(255, 193, 7, 0.2); padding: 8px; border-radius: 8px; margin-top: 8px;">
-                        🔊 Click to enable audio and start conversation
-                        <button onclick="forceStartConversation()" style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; margin-left: 8px; cursor: pointer;">
-                            Start Now
-                        </button>
-                    </div>
-                `;
-            }
-        }, 2000);
+        // Simple direct conversation starter
+        function startConversationNow() {
+            console.log('Starting conversation now...');
 
-        // Force start conversation (for browsers that block initial speech)
-        function forceStartConversation() {
-            if (typeof askNextQuestion === 'function') {
-                askNextQuestion();
+            // Update status
+            document.getElementById('demoStatus').textContent = '🎙️ Agent is speaking...';
+
+            // Get the conversation flow element
+            const conversationFlow = document.getElementById('conversationFlow');
+
+            // Clear any existing content
+            conversationFlow.innerHTML = '';
+
+            // The first question from our qualification questions
+            const firstQuestion = "Hi! I'm Alex, an AI voice agent, and I'm about to demonstrate exactly how I can transform your advertising campaigns. While we chat, I'll show you how voice agents capture leads naturally while qualifying them perfectly. First, what's your name?";
+
+            // Add the message to the conversation
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message agent-message';
+            messageDiv.innerHTML = `
+                <div class="message-content">${firstQuestion}</div>
+                <div class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+            `;
+            conversationFlow.appendChild(messageDiv);
+            conversationFlow.scrollTop = conversationFlow.scrollHeight;
+
+            // Speak the message
+            if (window.speechSynthesis) {
+                // Clear any existing speech
+                window.speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(firstQuestion);
+                utterance.rate = 0.9;
+                utterance.pitch = 1.1;
+                utterance.volume = 0.8;
+
+                utterance.onstart = function () {
+                    const statusIndicator = document.querySelector('.status-indicator');
+                    if (statusIndicator) statusIndicator.className = 'status-indicator speaking';
+                };
+
+                utterance.onend = function () {
+                    document.getElementById('demoStatus').textContent = '🎤 Your turn to speak...';
+                    // Update voice status to show listening
+                    const statusIndicator = document.querySelector('.status-indicator');
+                    const statusText = document.querySelector('#voiceStatus span');
+                    if (statusIndicator) statusIndicator.className = 'status-indicator listening';
+                    if (statusText) statusText.textContent = 'Listening for your response...';
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                // Fallback if speech synthesis not available
+                document.getElementById('demoStatus').textContent = '🎤 Your turn to speak (speech synthesis not available)...';
             }
-            document.getElementById('demoStatus').textContent = 'Conversation started!';
+
+            // Update progress
+            const nameProgress = document.getElementById('nameProgress');
+            if (nameProgress) {
+                nameProgress.querySelector('.item-status').textContent = 'In Progress';
+                nameProgress.querySelector('.item-status').className = 'item-status pending';
+            }
         }
+
+        // Manual start function (for the button)
+        function manualStart() {
+            startConversationNow();
+        }
+
+        // Auto-start when page loads
+        window.addEventListener('load', function () {
+            console.log('Page loaded, starting conversation in 1 second...');
+            setTimeout(() => {
+                startConversationNow();
+            }, 1000);
+        });
+
+        // Backup: also try when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, starting conversation in 2 seconds...');
+            setTimeout(() => {
+                // Only start if conversation hasn't started yet
+                const conversationFlow = document.getElementById('conversationFlow');
+                if (conversationFlow && conversationFlow.children.length === 0) {
+                    startConversationNow();
+                }
+            }, 2000);
+        });
 
         // Enhanced demo simulation function
         function startDemoSimulation() {
@@ -229,5 +298,7 @@
         }
     </script>
 </body>
+
+</html>
 
 </html>
