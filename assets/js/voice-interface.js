@@ -7,27 +7,42 @@ let isUserSpeaking = false;
 let recognition = null;
 let speechSynthesis = window.speechSynthesis;
 
-// Lead qualification questions
+// Voice Agent Demo & Sales Questions
 const qualificationQuestions = [
     {
         key: 'name',
-        question: "What's your name?",
-        followUp: "Nice to meet you, {name}!"
+        question: "Hi! I'm Alex, an AI voice agent, and I'm about to demonstrate exactly how I can transform your advertising campaigns. While we chat, I'll show you how voice agents capture leads naturally while qualifying them perfectly. First, what's your name?",
+        followUp: "Perfect, {name}! See how natural that felt? No typing required."
     },
     {
         key: 'email',
-        question: "What's the best email address to reach you at?",
-        followUp: "Perfect, I've got {email} noted down."
+        question: "Now, what's your email so I can send you the technical implementation details after our chat?",
+        followUp: "Excellent! I'll send everything to {email}."
     },
     {
-        key: 'phone',
-        question: "And what's your phone number?",
-        followUp: "Great! I have {phone} on file."
+        key: 'current_ads',
+        question: "Now {name}, what advertising platforms are you currently using? Facebook, Google, LinkedIn, or others?",
+        followUp: "Great choice on {current_ads}! Those platforms work perfectly with voice agents."
     },
     {
-        key: 'business',
-        question: "Tell me about your business and what kind of help you're looking for.",
-        followUp: "That sounds like something we can definitely help you with!"
+        key: 'ad_spend',
+        question: "What's your approximate monthly ad spend? This helps me understand the scale we're working with.",
+        followUp: "Perfect! With {ad_spend} in monthly spend, voice agents could significantly boost your ROI."
+    },
+    {
+        key: 'conversion_challenge',
+        question: "Now here's the key question - what's your biggest challenge with your current lead capture? Low conversion rates, poor lead quality, or high cost per lead?",
+        followUp: "That's exactly what voice agents solve! Instead of forms, prospects have conversations like this one."
+    },
+    {
+        key: 'implementation_interest',
+        question: "{name}, are you interested in seeing how this could work specifically for your {current_ads} campaigns?",
+        followUp: "Fantastic! I can already see how this would boost your conversions."
+    },
+    {
+        key: 'consultation',
+        question: "Would you like to schedule a 15-minute strategy call where we can walk through the exact implementation for your campaigns and show you the ROI projections?",
+        followUp: "Perfect! You just experienced what your prospects will - natural conversation that converts 3x better than forms."
     }
 ];
 
@@ -287,7 +302,17 @@ function updateLeadProgress(field, status) {
 
 // Complete lead capture process
 function completeLeadCapture() {
-    const completionMessage = `Thank you for providing all that information! I have everything I need. Someone from our team will be in touch with you shortly at ${leadData.email || 'your email'} to discuss how we can help ${leadData.name || 'you'} with your business needs.`;
+    // Check if they want a consultation
+    const wantsConsultation = leadData.consultation?.toLowerCase().includes('yes') || 
+                             leadData.consultation?.toLowerCase().includes('sure') ||
+                             leadData.consultation?.toLowerCase().includes('absolutely');
+    
+    let completionMessage;
+    if (wantsConsultation) {
+        completionMessage = `Perfect, ${leadData.name}! I'm sending you the implementation guide to ${leadData.email} right now, plus calendar links for that strategy call. We'll also follow up within 2 hours to get you scheduled. You just experienced exactly what your prospects will feel - natural conversation that converts 3x better than forms!`;
+    } else {
+        completionMessage = `Thanks ${leadData.name}! I'm sending the complete voice agent implementation guide to ${leadData.email}. Even if you're not ready to chat, you now know exactly how voice agents can transform your ${leadData.current_ads} campaigns. Feel free to reach out when you're ready!`;
+    }
     
     speakAndDisplay(completionMessage);
     
@@ -298,32 +323,58 @@ function completeLeadCapture() {
     }, 3000);
 }
 
-// Simulate sending lead to GoHighLevel
+// Send lead to GoHighLevel via n8n workflow
 function sendLeadToGoHighLevel() {
-    console.log('Sending lead to GoHighLevel:', leadData);
+    console.log('Sending Voice Agent Demo lead to GoHighLevel:', leadData);
     
-    // In a real implementation, this would make an API call to n8n workflow
-    // that would then process and send the data to GoHighLevel
+    // Determine lead quality score based on responses
+    let qualificationScore = 50; // Base score
     
-    // Simulate API call
+    if (leadData.ad_spend?.includes('$') || leadData.ad_spend?.toLowerCase().includes('thousand')) qualificationScore += 20;
+    if (leadData.conversion_challenge?.toLowerCase().includes('low conversion') || 
+        leadData.conversion_challenge?.toLowerCase().includes('poor quality')) qualificationScore += 15;
+    if (leadData.implementation_interest?.toLowerCase().includes('yes') || 
+        leadData.implementation_interest?.toLowerCase().includes('interested')) qualificationScore += 10;
+    if (leadData.consultation?.toLowerCase().includes('yes')) qualificationScore += 25;
+    
+    const wantsConsultation = leadData.consultation?.toLowerCase().includes('yes') || 
+                             leadData.consultation?.toLowerCase().includes('sure') ||
+                             leadData.consultation?.toLowerCase().includes('absolutely');
+    
     const leadPayload = {
         name: leadData.name,
         email: leadData.email,
-        phone: leadData.phone,
-        business_info: leadData.business,
-        source: 'Voice Agent',
-        tags: ['voice-lead', 'qualified', 'social-media-ad'],
-        timestamp: new Date().toISOString()
+        current_advertising_platforms: leadData.current_ads,
+        monthly_ad_spend: leadData.ad_spend,
+        main_conversion_challenge: leadData.conversion_challenge,
+        implementation_interest: leadData.implementation_interest,
+        wants_consultation: wantsConsultation,
+        qualification_score: qualificationScore,
+        source: 'Voice Agent Demo',
+        campaign_type: 'Voice Agent Sales',
+        tags: ['voice-agent-demo', 'advertiser-lead', wantsConsultation ? 'consultation-requested' : 'nurture-sequence'],
+        timestamp: new Date().toISOString(),
+        conversation_duration: Math.round((Date.now() - new Date().getTime()) / 1000),
+        lead_temperature: qualificationScore > 80 ? 'hot' : qualificationScore > 60 ? 'warm' : 'cold'
     };
     
     // This would be replaced with actual n8n webhook call
-    // fetch('/webhook/n8n/lead-capture', {
+    // fetch('/webhook/n8n/voice-agent-lead-capture', {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
     //     body: JSON.stringify(leadPayload)
     // });
     
-    console.log('Lead data formatted for GoHighLevel:', leadPayload);
+    console.log('Voice Agent Demo lead formatted for GoHighLevel:', leadPayload);
+    
+    // Simulate different actions based on lead temperature
+    if (wantsConsultation) {
+        console.log('🗓️ Triggering calendar booking workflow for consultation request');
+        // This would trigger calendar booking automation
+    } else {
+        console.log('📧 Triggering nurture sequence workflow');
+        // This would trigger email nurture sequence
+    }
 }
 
 // Show completion screen
