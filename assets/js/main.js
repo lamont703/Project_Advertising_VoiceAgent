@@ -40,14 +40,8 @@ function initializeSpeechRecognition() {
 
 // Start voice conversation
 function startVoiceConversation() {
-    if (!isListening && recognition) {
-        recognition.start();
-    } else if (isListening) {
-        recognition.stop();
-    } else {
-        // Fallback for browsers without speech recognition
-        simulateVoiceStart();
-    }
+    // Immediately redirect to voice interface - agent will greet user there
+    window.location.href = 'voice-interface.html';
 }
 
 // Simulate voice start for demo purposes

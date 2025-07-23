@@ -270,7 +270,8 @@ body {
 }
 
 .message {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    animation: slideIn 0.5s ease-out;
 }
 
 .message-content {
@@ -282,18 +283,27 @@ body {
 }
 
 .agent-message .message-content {
-    background: rgba(74, 144, 226, 0.3);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 18px 18px 18px 6px;
+    max-width: 80%;
+    line-height: 1.5;
 }
 
 .user-message .message-content {
-    background: rgba(76, 175, 80, 0.3);
-    text-align: right;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 18px 18px 6px 18px;
+    max-width: 80%;
+    line-height: 1.5;
 }
 
 .message-time {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
-    text-align: right;
+    margin-top: 4px;
 }
 
 /* Voice Controls */
@@ -372,9 +382,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .item-label {
@@ -389,29 +401,44 @@ body {
 }
 
 .item-status.pending {
-    background: rgba(255, 193, 7, 0.3);
-    color: #FFD700;
+    background: rgba(255, 152, 0, 0.2);
+    color: #FF9800;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .item-status.completed {
-    background: rgba(76, 175, 80, 0.3);
-    color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 /* End Call Button */
 .end-call-btn {
-    background: #f44336;
+    background: linear-gradient(135deg, #ff4757, #ff3742);
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 25px;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: 500;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
 }
 
 .end-call-btn:hover {
-    background: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 71, 87, 0.4);
+    background: linear-gradient(135deg, #ff3742, #ff2533);
+}
+
+.end-call-btn:active {
+    transform: translateY(0);
 }
 
 /* Responsive Design */
@@ -464,5 +491,145 @@ body {
     
     .button-text {
         font-size: 1rem;
+    }
+} 
+
+/* Demo Mode Indicator */
+.demo-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border-radius: 12px;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: demoGlow 2s ease-in-out infinite alternate;
+}
+
+.demo-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.demo-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.demo-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes demoGlow {
+    0% {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    }
+}
+
+/* Enhanced conversation messages */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 
+
+/* Demo Interface Styling */
+.demo-badge-header {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 12px;
+    animation: demoGlow 2s ease-in-out infinite alternate;
+}
+
+.simulate-btn {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+    margin-right: 10px;
+}
+
+.simulate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(78, 205, 196, 0.4);
+    background: linear-gradient(135deg, #44a08d, #3a8e7a);
+}
+
+.demo-status {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.demo-note {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(139, 195, 74, 0.2));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 16px;
+}
+
+.demo-note p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced conversation controls */
+.conversation-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .demo-badge-header {
+        display: none;
+    }
+    
+    .conversation-controls {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .simulate-btn,
+    .end-call-btn {
+        width: 100%;
+        margin: 0;
     }
 } 

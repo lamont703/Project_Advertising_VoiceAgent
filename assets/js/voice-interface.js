@@ -47,11 +47,31 @@ const qualificationQuestions = [
 ];
 
 let currentQuestionIndex = 0;
+let demoMode = false;
+let demoResponses = [
+    "Hi, my name is Michael Johnson",
+    "My email is michael@digitalmarketingpro.com",
+    "We use Facebook and Google Ads primarily",
+    "About $25,000 per month in ad spend",
+    "Our biggest challenge is low conversion rates - we get lots of clicks but not enough quality leads",
+    "Yes, absolutely! I'd love to see how this could work for our campaigns",
+    "Yes, definitely! I'd like to schedule that strategy call to discuss implementation"
+];
 
 // Initialize the voice interface
 function initializeVoiceInterface() {
     setupSpeechRecognition();
     displayInitialMessage();
+    
+    // Check if demo mode should be enabled (you can add ?demo=true to URL)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('demo') === 'true') {
+        demoMode = true;
+        setTimeout(() => {
+            addDemoModeIndicator();
+        }, 1000);
+    }
+    
     startConversationFlow();
 }
 
@@ -102,9 +122,14 @@ function displayInitialMessage() {
 
 // Start the conversation flow
 function startConversationFlow() {
+    // Clear the initial HTML message first
+    const conversationFlow = document.getElementById('conversationFlow');
+    conversationFlow.innerHTML = '';
+    
+    // Immediately start the agent speaking
     setTimeout(() => {
         askNextQuestion();
-    }, 1000);
+    }, 500); // Reduced delay for quicker response
 }
 
 // Ask the next qualification question
@@ -141,6 +166,12 @@ function handleUserResponse(transcript) {
             
             setTimeout(() => {
                 currentQuestionIndex++;
+                if (demoMode && currentQuestionIndex < qualificationQuestions.length) {
+                    // Simulate next response automatically in demo mode
+                    setTimeout(() => {
+                        simulateUserResponse();
+                    }, 3000);
+                }
                 askNextQuestion();
             }, 2000);
         }, 1000);
@@ -175,6 +206,9 @@ function speakText(text) {
     if (speechSynthesis) {
         isAgentSpeaking = true;
         updateVoiceStatus('speaking');
+        
+        // Clear any existing speech
+        speechSynthesis.cancel();
         
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.rate = 0.9;
@@ -430,6 +464,94 @@ function startNewConversation() {
 // Format time for display
 function formatTime(date) {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// Add demo mode indicator
+function addDemoModeIndicator() {
+    const demoIndicator = document.createElement('div');
+    demoIndicator.className = 'demo-indicator';
+    demoIndicator.innerHTML = `
+        <div class="demo-badge">
+            🎭 Demo Mode - Automated Responses
+            <button onclick="toggleDemoMode()" class="demo-toggle">Manual Mode</button>
+        </div>
+    `;
+    document.body.appendChild(demoIndicator);
+}
+
+// Toggle demo mode
+function toggleDemoMode() {
+    demoMode = !demoMode;
+    const indicator = document.querySelector('.demo-indicator');
+    if (indicator) {
+        indicator.remove();
+    }
+    if (demoMode) {
+        addDemoModeIndicator();
+    }
+}
+
+// Enhanced handleUserResponse with demo simulation
+function handleUserResponse(transcript) {
+    addMessageToConversation('user', transcript);
+    
+    // Process the response based on current question
+    if (currentQuestionIndex < qualificationQuestions.length) {
+        const question = qualificationQuestions[currentQuestionIndex];
+        
+        // Extract and store lead data
+        leadData[question.key] = transcript;
+        updateLeadProgress(question.key, 'completed');
+        
+        // Provide follow-up response
+        let followUp = question.followUp;
+        Object.keys(leadData).forEach(key => {
+            followUp = followUp.replace(`{${key}}`, leadData[key]);
+        });
+        
+        setTimeout(() => {
+            speakAndDisplay(followUp);
+            
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (demoMode && currentQuestionIndex < qualificationQuestions.length) {
+                    // Simulate next response automatically in demo mode
+                    setTimeout(() => {
+                        simulateUserResponse();
+                    }, 3000);
+                }
+                askNextQuestion();
+            }, 2000);
+        }, 1000);
+    }
+}
+
+// Simulate user response for demo
+function simulateUserResponse() {
+    if (currentQuestionIndex < demoResponses.length) {
+        const response = demoResponses[currentQuestionIndex];
+        setTimeout(() => {
+            handleUserResponse(response);
+        }, 1500);
+    }
+}
+
+// Enhanced askNextQuestion with demo support
+function askNextQuestion() {
+    if (currentQuestionIndex < qualificationQuestions.length) {
+        const question = qualificationQuestions[currentQuestionIndex];
+        speakAndDisplay(question.question);
+        
+        // In demo mode, automatically provide responses after agent speaks
+        if (demoMode && currentQuestionIndex < demoResponses.length) {
+            setTimeout(() => {
+                simulateUserResponse();
+            }, 4000); // Give time for agent to finish speaking
+        }
+    } else {
+        // All questions completed
+        completeLeadCapture();
+    }
 }
 
 // Initialize when page loads

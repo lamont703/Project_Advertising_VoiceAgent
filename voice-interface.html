@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Conversation - VoiceAgent</title>
+    <title>Voice Agent Demo - See It In Action</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -14,8 +14,10 @@
         <header class="header minimal">
             <div class="logo">
                 <h1>VoiceAgent</h1>
+                <span class="demo-badge-header">🎭 Live Demo</span>
             </div>
             <div class="conversation-controls">
+                <button id="simulateDemo" class="simulate-btn" onclick="startDemoSimulation()">🚀 Auto Demo</button>
                 <button id="endCall" class="end-call-btn" onclick="endConversation()">End Conversation</button>
             </div>
         </header>
@@ -27,19 +29,16 @@
                         <div class="pulse-ring" id="pulseRing"></div>
                         <div class="avatar-icon">🤖</div>
                     </div>
-                    <h3 id="agentName">Sarah</h3>
-                    <p class="agent-title">Your Voice Assistant</p>
+                    <h3 id="agentName">Alex</h3>
+                    <p class="agent-title">AI Voice Agent Demo</p>
+                    <div class="demo-status" id="demoStatus">
+                        Agent will start speaking in just a moment...
+                    </div>
                 </div>
 
                 <div class="conversation-area">
                     <div id="conversationFlow" class="conversation-flow">
-                        <div class="message agent-message">
-                            <div class="message-content">
-                                Hi! I'm Sarah, your voice assistant. I'm here to help you find the perfect solution for
-                                your needs. What brings you here today?
-                            </div>
-                            <div class="message-time">Just now</div>
-                        </div>
+                        <!-- Agent will start speaking immediately when page loads -->
                     </div>
 
                     <div class="voice-controls">
@@ -62,14 +61,14 @@
                         </button>
 
                         <div id="voiceStatus" class="voice-status">
-                            <div class="status-indicator listening"></div>
-                            <span>Listening for your response</span>
+                            <div class="status-indicator speaking"></div>
+                            <span>Agent is starting the conversation...</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="lead-progress">
-                    <h4>Information Captured</h4>
+                    <h4>Lead Information Captured</h4>
                     <div class="progress-items">
                         <div class="progress-item" id="nameProgress">
                             <span class="item-label">Name</span>
@@ -79,14 +78,27 @@
                             <span class="item-label">Email</span>
                             <span class="item-status pending">Pending</span>
                         </div>
-                        <div class="progress-item" id="phoneProgress">
-                            <span class="item-label">Phone</span>
+                        <div class="progress-item" id="current_adsProgress">
+                            <span class="item-label">Ad Platforms</span>
                             <span class="item-status pending">Pending</span>
                         </div>
-                        <div class="progress-item" id="needsProgress">
-                            <span class="item-label">Needs</span>
+                        <div class="progress-item" id="ad_spendProgress">
+                            <span class="item-label">Ad Spend</span>
                             <span class="item-status pending">Pending</span>
                         </div>
+                        <div class="progress-item" id="conversion_challengeProgress">
+                            <span class="item-label">Challenge</span>
+                            <span class="item-status pending">Pending</span>
+                        </div>
+                        <div class="progress-item" id="consultationProgress">
+                            <span class="item-label">Consultation</span>
+                            <span class="item-status pending">Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-note">
+                        <p>💡 <strong>This is a live demo</strong> - Watch how the AI naturally captures advertiser
+                            information while demonstrating the technology!</p>
                     </div>
                 </div>
             </div>
@@ -94,6 +106,128 @@
     </div>
 
     <script src="assets/js/voice-interface.js"></script>
+
+    <script>
+        // Check if agent started speaking successfully
+        setTimeout(() => {
+            const statusElement = document.getElementById('demoStatus');
+            if (!window.speechSynthesis.speaking && !isAgentSpeaking) {
+                statusElement.innerHTML = `
+                    <div style="background: rgba(255, 193, 7, 0.2); padding: 8px; border-radius: 8px; margin-top: 8px;">
+                        🔊 Click to enable audio and start conversation
+                        <button onclick="forceStartConversation()" style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; margin-left: 8px; cursor: pointer;">
+                            Start Now
+                        </button>
+                    </div>
+                `;
+            }
+        }, 2000);
+
+        // Force start conversation (for browsers that block initial speech)
+        function forceStartConversation() {
+            if (typeof askNextQuestion === 'function') {
+                askNextQuestion();
+            }
+            document.getElementById('demoStatus').textContent = 'Conversation started!';
+        }
+
+        // Enhanced demo simulation function
+        function startDemoSimulation() {
+            const simulateBtn = document.getElementById('simulateDemo');
+            simulateBtn.textContent = '⏸️ Stop Demo';
+            simulateBtn.onclick = stopDemoSimulation;
+
+            // Update demo status
+            document.getElementById('demoStatus').textContent = 'Running automated demo conversation...';
+
+            // Enable demo mode
+            demoMode = true;
+            window.location.href = window.location.pathname + '?demo=true';
+        }
+
+        function stopDemoSimulation() {
+            const simulateBtn = document.getElementById('simulateDemo');
+            simulateBtn.textContent = '🚀 Auto Demo';
+            simulateBtn.onclick = startDemoSimulation;
+
+            document.getElementById('demoStatus').textContent = 'Demo stopped - Click "Auto Demo" to restart';
+            demoMode = false;
+        }
+
+        // Enhanced end conversation with better feedback
+        function endConversation() {
+            if (recognition) {
+                recognition.stop();
+            }
+            if (speechSynthesis) {
+                speechSynthesis.cancel();
+            }
+
+            // Show completion modal instead of alert
+            const modal = document.createElement('div');
+            modal.className = 'completion-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>🎉 Demo Complete!</h3>
+                    <p>You just experienced a voice agent that converts 3x better than forms.</p>
+                    <p>Ready to implement this for your advertising campaigns?</p>
+                    <div class="modal-actions">
+                        <button onclick="window.location.href='index.html'" class="primary-btn">Back to Home</button>
+                        <button onclick="window.location.reload()" class="secondary-btn">Try Again</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Add modal styles
+            const modalStyle = document.createElement('style');
+            modalStyle.textContent = `
+                .completion-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 2000;
+                }
+                .modal-content {
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 16px;
+                    text-align: center;
+                    max-width: 400px;
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                }
+                .modal-actions {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 1.5rem;
+                }
+                .primary-btn, .secondary-btn {
+                    flex: 1;
+                    padding: 0.75rem;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                }
+                .primary-btn {
+                    background: #4CAF50;
+                    color: white;
+                }
+                .secondary-btn {
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                }
+            `;
+            document.head.appendChild(modalStyle);
+        }
+    </script>
 </body>
 
 </html>
