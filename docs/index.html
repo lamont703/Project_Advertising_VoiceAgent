@@ -348,26 +348,36 @@
         </section>
 
         <section id="getting-started" class="docs-section">
-            <h2>🚀 Getting Started</h2>
+            <h2>🚀 GoHighLevel Deployment Guide</h2>
 
-            <h3>Quick Setup Guide</h3>
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                <h3 style="margin-top: 0; color: white;">🏗️ Architecture Overview</h3>
+                <p>This Voice Agent system is designed to run entirely within the <strong>GoHighLevel ecosystem</strong>, with <strong>n8n integration</strong> for advanced workflow automation.</p>
+            </div>
+
+            <h3>GoHighLevel Setup Process</h3>
             <ol>
-                <li><strong>Download the System:</strong> Clone or download all project files</li>
-                <li><strong>Configure Your Brand:</strong> Update colors, logos, and messaging in the CSS files</li>
-                <li><strong>Set Up Integrations:</strong> Connect your CRM and configure webhook endpoints</li>
-                <li><strong>Customize Questions:</strong> Use the admin panel to set up your qualification questions
-                </li>
-                <li><strong>Test the System:</strong> Run through the entire flow to ensure everything works</li>
-                <li><strong>Deploy:</strong> Host on your web server or CDN</li>
+                <li><strong>Create GoHighLevel Pages:</strong> Use funnel builder to create landing and voice interface pages</li>
+                <li><strong>Upload Assets:</strong> Add CSS/JS files to GoHighLevel media library</li>
+                <li><strong>Configure Custom Fields:</strong> Set up CRM fields for voice agent data capture</li>
+                <li><strong>Set Up Workflows:</strong> Create GoHighLevel automation workflows</li>
+                <li><strong>Connect n8n:</strong> Configure webhook triggers to n8n workflows</li>
+                <li><strong>Test Integration:</strong> Verify complete lead capture and automation flow</li>
             </ol>
 
-            <h3>Requirements</h3>
+            <h3>System Requirements</h3>
             <ul>
-                <li>Modern web browser with Speech API support (Chrome, Safari, Edge)</li>
-                <li>HTTPS hosting (required for microphone access)</li>
-                <li>n8n instance for workflow automation</li>
-                <li>CRM system API access (GoHighLevel, HubSpot, etc.)</li>
+                <li><strong>GoHighLevel Account:</strong> With funnel builder and API access</li>
+                <li><strong>n8n Instance:</strong> For advanced workflow automation</li>
+                <li><strong>Modern Browsers:</strong> Chrome, Safari, Edge (for Speech API)</li>
+                <li><strong>HTTPS Pages:</strong> GoHighLevel provides HTTPS by default</li>
             </ul>
+
+            <h3>Integration Architecture</h3>
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <strong>Data Flow:</strong><br>
+                🎙️ Voice Interface → 📊 GoHighLevel CRM → ⚡ GoHighLevel Workflow → 🔄 n8n Webhook → 🤖 Advanced Automation
+            </div>
 
             <h3>File Structure</h3>
             <div class="code-block">

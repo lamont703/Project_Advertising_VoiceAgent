@@ -40,35 +40,57 @@ VoiceAgent is an intelligent voice conversation system designed specifically for
 - **Webhook support** for custom integrations
 - **CSV export** for external analysis
 
-## 🚀 Quick Start
+## 🚀 GoHighLevel Deployment Guide
 
-### 1. Download & Setup
+### 🏗️ **Architecture Overview**
 
-```bash
-# Clone or download the project files
-git clone https://github.com/your-repo/voiceagent.git
-cd voiceagent
+This Voice Agent system is designed to be **hosted within GoHighLevel** and integrate seamlessly with **n8n workflows**:
+
+- **🏠 Frontend Pages**: Hosted as GoHighLevel custom pages/funnels
+- **🎙️ Voice Interface**: Embedded in GoHighLevel landing pages
+- **📊 Lead Capture**: Direct integration with GoHighLevel CRM
+- **⚡ Automation**: n8n workflows triggered via GoHighLevel webhooks
+
+### 1. GoHighLevel Setup
+
+**Create Custom Pages** in your GoHighLevel account:
+
+- **Landing Page**: Use `index.html` content as GoHighLevel funnel page
+- **Voice Interface**: Use `voice-interface.html` content as conversation page
+- **Assets**: Upload CSS/JS files to GoHighLevel media library
+
+### 2. Configure GoHighLevel Integration
+
+**Set up Custom Fields** in GoHighLevel CRM:
+
+```javascript
+// Required custom fields for voice agent data
+-current_advertising_platforms(text) -
+  monthly_ad_spend(text) -
+  main_conversion_challenge(text) -
+  implementation_interest(text) -
+  wants_consultation(boolean) -
+  qualification_score(number) -
+  lead_temperature(text); // hot/warm/cold
 ```
 
-### 2. Configure Your Brand
+### 3. n8n Workflow Integration
 
-1. Edit `assets/css/main.css` to update colors and styling
-2. Replace logo and company information in `index.html`
-3. Customize the agent personality in the admin panel
+1. **Create n8n Workflow** with GoHighLevel webhook trigger
+2. **Configure Webhook URL** in GoHighLevel automation
+3. **Set up API connections** for data flow between systems
 
-### 3. Set Up Integrations
-
-1. Open `admin.html` in your browser
-2. Navigate to Integrations section
-3. Add your CRM API keys and webhook URLs
-4. Configure n8n workflow endpoints
-
-### 4. Deploy
+### 4. Deploy Process
 
 ```bash
-# Upload all files to your web server
-# Ensure HTTPS is enabled (required for microphone access)
-# Point your domain to the index.html file
+# No traditional web hosting needed!
+# Everything runs within GoHighLevel:
+
+1. Create GoHighLevel funnel pages
+2. Embed voice interface code
+3. Configure GoHighLevel automation
+4. Connect n8n webhook triggers
+5. Test complete lead capture flow
 ```
 
 ## 📁 Project Structure
@@ -148,12 +170,12 @@ const qualificationQuestions = [
 - **n8n instance** for workflow automation (optional)
 - **CRM API access** for lead integration
 
-### Recommended Hosting
+### GoHighLevel Hosting Architecture
 
-- **Netlify** - Easy deployment with HTTPS
-- **Vercel** - Great for static hosting
-- **AWS S3 + CloudFront** - Scalable solution
-- **Traditional hosting** with SSL certificate
+- **GoHighLevel Pages** - Native funnel/page builder hosting
+- **GoHighLevel Media Library** - For CSS, JS, and image assets
+- **GoHighLevel Workflows** - Built-in automation engine
+- **n8n Integration** - External workflow processing via webhooks
 
 ## 📊 Analytics & Tracking
 

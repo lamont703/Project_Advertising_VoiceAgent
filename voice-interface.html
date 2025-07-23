@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+GOHIGHLEVEL VOICE INTERFACE PAGE:
+This is the main conversation interface designed for GoHighLevel hosting.
+
+DEPLOYMENT CHECKLIST:
+✅ Upload this page content to GoHighLevel funnel builder
+✅ Upload assets/css/main.css to GoHighLevel media library
+✅ Upload assets/js/voice-interface.js to GoHighLevel media library  
+✅ Update all asset URLs to GoHighLevel media URLs
+✅ Configure GoHighLevel custom fields for lead data capture
+✅ Set up GoHighLevel workflow to trigger n8n on form submission
+✅ Test voice recognition functionality (requires HTTPS - GoHighLevel provides)
+
+INTEGRATION FLOW:
+Voice Conversation → GoHighLevel CRM → GoHighLevel Workflow → n8n Webhook → Advanced Automation
+-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Agent Demo - See It In Action</title>
+    <title>Voice Agent Demo - Live Conversation | GoHighLevel</title>
     <link rel="stylesheet" href="assets/css/main.css">
+    <!-- UPDATE: Change to GoHighLevel media URL: https://your-location.gohighlevel.com/media/main.css -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -33,7 +50,8 @@
                     <p class="agent-title">AI Voice Agent Demo</p>
                     <div class="demo-status" id="demoStatus">
                         🎙️ Starting conversation...
-                        <button onclick="startConversationNow()" style="background: #4CAF50; color: white; border: none; padding: 4px 12px; border-radius: 6px; margin-left: 8px; cursor: pointer;">
+                        <button onclick="startConversationNow()"
+                            style="background: #4CAF50; color: white; border: none; padding: 4px 12px; border-radius: 6px; margin-left: 8px; cursor: pointer;">
                             Start Now
                         </button>
                     </div>

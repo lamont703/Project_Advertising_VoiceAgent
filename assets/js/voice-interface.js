@@ -1,4 +1,16 @@
 // Voice interface page JavaScript functionality
+// 
+// ARCHITECTURE NOTE: This system is designed to run within GoHighLevel
+// - Frontend pages hosted as GoHighLevel funnel pages
+// - Lead data captured directly into GoHighLevel CRM
+// - n8n workflows triggered via GoHighLevel webhooks
+// - CSS/JS assets served from GoHighLevel media library
+//
+// INTEGRATION FLOW:
+// 1. Voice conversation captures lead data
+// 2. Data sent to GoHighLevel CRM via API
+// 3. GoHighLevel triggers n8n workflow via webhook
+// 4. n8n processes advanced automation logic
 
 let conversationHistory = [];
 let leadData = {};
@@ -420,10 +432,17 @@ function sendLeadToGoHighLevel() {
         lead_temperature: qualificationScore > 80 ? 'hot' : qualificationScore > 60 ? 'warm' : 'cold'
     };
     
-    // This would be replaced with actual n8n webhook call
-    // fetch('/webhook/n8n/voice-agent-lead-capture', {
+    // GOHIGHLEVEL INTEGRATION:
+    // 1. Send lead data directly to GoHighLevel CRM via API
+    // 2. GoHighLevel workflow automatically triggers n8n via webhook
+    // 
+    // Example GoHighLevel API call:
+    // fetch('https://rest.gohighlevel.com/v1/contacts/', {
     //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
+    //     headers: { 
+    //         'Authorization': 'Bearer YOUR_GHL_API_KEY',
+    //         'Content-Type': 'application/json' 
+    //     },
     //     body: JSON.stringify(leadPayload)
     // });
     
